@@ -27,7 +27,40 @@ public class SerialComm {
 	}
 		
 	// TODO: Add writeByte() method that you created in Studio 5
-	// TODO: Add available() and readByte() that you created in Studio 6
+	public void writeByte(byte c)
+	{
+		try {
+			port.writeByte(c);
+		} catch (SerialPortException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(debug)
+			System.out.println("<0x" + Integer.toHexString(c) + ">");
+	}
 	
+	// TODO: Add available() and readByte() that you created in Studio 6
+	public boolean available() {
+		try {
+			if(port.getInputBufferBytesCount()!=-1)
+				return true;
+			else
+				return false;
+		} catch (SerialPortException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+	
+	public char readByte() throws SerialPortException {
+		byte[] c = new byte[1];
+		c = port.readBytes(1);
+		if(debug)
+			System.out.println("[0x" + Integer.toHexString(c[0]) + "]");
+		return (char) c[0];
+	}
 	
 }
