@@ -87,7 +87,9 @@ void convertIncomingMorseCodeToChars() {
       {
         char code = morseDecode(buff);
         if (code == 0)
-          Serial.print("#Not a valid Morse Code!#");
+          {Serial.print("#Not a valid Morse Code!#");
+          
+          }
         else
         {
           Serial.print("#Letter:#");
@@ -109,7 +111,8 @@ void convertIncomingMorseCodeToChars() {
       charFlag = 0;
       
       if (temp < .66 * UNIT)
-        Serial.print("#Too short for a dot! Ignored!#");
+        { Serial.print("#Too short for a dot! Ignored!#");
+          }
         
       else if (temp < 1.33 * UNIT)
       {
@@ -121,12 +124,15 @@ void convertIncomingMorseCodeToChars() {
           bufferCount = 0;
         }
         else
-          Serial.print("#.#"); 
+          {Serial.print("#.#");
+            }
       }
       
       else if (temp < .66 * 3 * UNIT)
+      {
         Serial.print("#Too long for a dot, but too short for a dash! Ignored!#");
-        
+      }
+      
       else if (temp < 1.33 * 3 * UNIT)
       {
         buff[bufferCount] = '-';
@@ -137,7 +143,9 @@ void convertIncomingMorseCodeToChars() {
           bufferCount = 0;
         }
         else
-          Serial.print("#-#");
+          {Serial.print("#-#");
+          
+          }
       }
 
       else
@@ -233,7 +241,7 @@ void loop() {
   // No Need to Modify this.  Put most of your code in "convertIncomingMorseCodeToChars()" and "updateLED()"
   updateLED();
   convertIncomingMorseCodeToChars();
-  //convertIncomingCharsToMorseCode();
+  convertIncomingCharsToMorseCode();
 
   // Extra credit: Merge in your convertIncomingCharsToMorseCode() to have a 
   // complete encoder/decoder
